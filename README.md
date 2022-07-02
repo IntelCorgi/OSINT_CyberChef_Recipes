@@ -17,6 +17,7 @@ Number | Recipe | Author |
 | --- | --- | --- |
 | 00 | [Defang All](#00---defang-all) | IntelCorgi
 | 01 | [Refang All](#01---refang-all) | IntelCorgi
+| 02 | [SHA256 hash list to VTI livehunt](#02---SHA256-hash-list-to-VTI-livehunt) | IntelCorgi
 ----------------------
 
 ### 00 - Defang All
@@ -42,4 +43,13 @@ Find_/_Replace({'option':'Simple string','string':'[.]'},'.',true,false,true,fal
 Find_/_Replace({'option':'Simple string','string':'hxxp'},'http',true,false,true,false)
 Find_/_Replace({'option':'Simple string','string':'[@]'},'@',true,false,true,false)
 Find_/_Replace({'option':'Simple string','string':'[://]'},'://',true,false,true,false)
+```
+### 02 - SHA256 hash list to VTI livehunt
+**Author:** IntelCorgi
+
+**Purpose:** Useful when you're developing a Livehunt rule to alert when files with a certain hash are uploaded to VirusTotal. Since Livehunt uses YARA for detection, working with a huge list of hashes can get a little out of hand. Copy and paste the result of this receipie in the conditions section of the rule. You will have to edit the beginning and ending of the list. If you are using a different type of hash, just replace the "sha256" part.
+
+**Recipe**
+```
+Find_/_Replace({'option':'Extended (\\n, \\t, \\x...)','string':'\\n'},'" \\n vt.metadata.sha256 == "',true,false,true,false)
 ```
